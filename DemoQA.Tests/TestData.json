@@ -1,0 +1,11 @@
+{
+    "DefaultSettings":{
+        "Url": "https://demoqa.com/"
+    },
+    "User":{
+        "FullName": "Иван Иванов",
+        "Email": "ivan.ivanov@example.com",
+        "CurrentAddress": "г. Москва, ул. Примерная, д. 1",
+        "PermanentAddress": "г. Москва, ул. Примерная, д. 1"
+    }
+}
