@@ -9,9 +9,6 @@ public class RadioButtonPage : PageBase
     private readonly IPage _page;
     public RadioButton RadioButtonImpressive => new(_page.GetByLabel(RadioButtonPageEnums.Impressive.ToString()));
     public RadioButton TextSuccess => new(_page.Locator(".text-success"));
+    public RadioButtonPage(IPage page) : base(page) => _page = page;
 
-    public RadioButtonPage(IPage page) : base(page)
-    {
-        _page = page;
-    }
 }
