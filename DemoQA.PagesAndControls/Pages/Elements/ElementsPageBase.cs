@@ -9,4 +9,5 @@ public class ElementsPageBase(IPage page) : PageBase(page)
     public ILocator ElementsAccordion => GetAccordion(ElementsAccordionTitle);
     public ILocator AccordionRadioButton => GetAccordionItem(ElementsAccordion, ElementAccordionListEnum.RadioButton.GetDescription());
     public ILocator AccordionTextBox => GetAccordionItem(ElementsAccordion, ElementAccordionListEnum.TextBox.GetDescription());
+    public ILocator AccordionWebTables => GetAccordionItem(ElementsAccordion, ElementAccordionListEnum.WebTables.GetDescription());
 }
