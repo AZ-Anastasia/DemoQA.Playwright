@@ -27,6 +27,17 @@ dotnet add DemoQA.Tests reference DemoQA.PagesAndControls
 
 Настройки для Playwright в PlaywrightSetup.cs
 
+Как настраивать GitHub Actions: \
+https://learn.microsoft.com/ru-ru/dotnet/devops/github-actions-overview
+
+https://learn.microsoft.com/ru-ru/dotnet/devops/dotnet-test-github-action
+
+Про настройку .yaml/.yml: \
+https://github.com/actions/setup-dotnet
+
+Про настройку Allure:\
+https://github.com/simple-elf/allure-report-action
+
 ---
 ---
 ---
