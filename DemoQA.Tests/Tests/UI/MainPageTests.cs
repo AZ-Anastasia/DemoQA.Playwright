@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace DemoQA.Tests.Tests.UI;
 
-[AllureLabel("UI", "MainPage")]
+[AllureParentSuite("UI")]
+[AllureSuite("MainPage")]
 public class MainPageTests : PlaywrightSetup
 {
     private MainPage _mainPage => new(Page);

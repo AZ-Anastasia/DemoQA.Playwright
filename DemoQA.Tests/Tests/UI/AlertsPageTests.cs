@@ -1,3 +1,4 @@
+using Allure.NUnit.Attributes;
 using DemoQA.PagesAndControls.Enums;
 using DemoQA.PagesAndControls.Pages;
 using DemoQA.PagesAndControls.Pages.AlertsBrowserWindows;
@@ -5,6 +6,8 @@ using NUnit.Framework;
 
 namespace DemoQA.Tests.Tests.UI;
 
+[AllureParentSuite("UI")]
+[AllureSuite("AlertsPage")]
 public class AlertsPageTests : PlaywrightSetup
 {
     private MainPage _mainPage => new(Page);

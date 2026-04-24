@@ -1,42 +1,76 @@
-## Создание проекта
-Создать папку для решения
-```
-mkdir Playwright
-cd Playwright
-```
+## Отчеты
 
-Создание пустого проекта:
-```
-dotnet new sln -n DemoQA.Playwright
-```
+### https://az-anastasia.github.io/DemoQA.Playwright/
 
-Создание проекта для тестов:
-```
-dotnet new nunit -n DemoQA.Tests
-```
+<details>
+   <summary>
+      <b>
+         Создание проекта
+      </b>
+   </summary>
 
-Создание проекта для страниц и элементов:
-```
-dotnet new classlib -n DemoQA.PagesAndControls
-```
+   Создать папку для решения
+   ```
+   mkdir Playwright
+   cd Playwright
+   ```
 
-Добавление ссылки в проект:
-```
-dotnet add DemoQA.Tests reference DemoQA.PagesAndControls
-```
+   Создание пустого проекта:
+   ```
+   dotnet new sln -n DemoQA.Playwright
+   ```
 
-Настройки для Playwright в PlaywrightSetup.cs
+   Создание проекта для тестов:
+   ```
+   dotnet new nunit -n DemoQA.Tests
+   ```
 
-Как настраивать GitHub Actions: \
-https://learn.microsoft.com/ru-ru/dotnet/devops/github-actions-overview
+   Создание проекта для страниц и элементов:
+   ```
+   dotnet new classlib -n DemoQA.PagesAndControls
+   ```
 
-https://learn.microsoft.com/ru-ru/dotnet/devops/dotnet-test-github-action
+   Добавление ссылки в проект:
+   ```
+   dotnet add DemoQA.Tests reference DemoQA.PagesAndControls
+   ```
 
-Про настройку .yaml/.yml: \
-https://github.com/actions/setup-dotnet
+   Настройки для Playwright в PlaywrightSetup.cs
 
-Про настройку Allure:\
-https://github.com/simple-elf/allure-report-action
+</details>
+
+<details>
+   <summary>
+      <b>
+         Как настраивать GitHub Actions:
+      </b>
+   </summary>
+
+- [GitHub Actions and .NET](https://learn.microsoft.com/ru-ru/dotnet/devops/github-actions-overview)
+- [Quickstart: Create a test validation GitHub workflow](https://learn.microsoft.com/ru-ru/dotnet/devops/dotnet-test-github-action)
+</details>
+
+<details>
+   <summary>
+      <b>
+         Про настройку .yaml/.yml:
+      </b>
+   </summary>
+
+- [GitHub: setup-dotnet](https://github.com/actions/setup-dotnet)
+
+</details>
+
+<details>
+   <summary>
+      <b>
+         Про настройку Allure:
+      </b>
+   </summary>
+
+- [GitHub: allure-report-action](https://github.com/simple-elf/allure-report-action)
+
+</details>
 
 ---
 ---
@@ -55,6 +89,7 @@ https://github.com/simple-elf/allure-report-action
 #### Шаги для теста:
 1. Проверить, количество карточек элементов на странице равно `6`
 
+---
 
 ### TestID 002
 
@@ -72,6 +107,7 @@ https://github.com/simple-elf/allure-report-action
 4. Проверить, что эта кнопка выбрана
 5. Проверить, что текст ниже содержит текст кнопки - `Impressive`
 
+---
 
 ### TestID 003
 
@@ -93,6 +129,7 @@ https://github.com/simple-elf/allure-report-action
 4. Нажать кнопку `Submit`
 5. Проверить, что введённые данные корректно отображаются в блоке ниже формы
 
+---
 
 ### TestID 004
 
@@ -110,6 +147,7 @@ https://github.com/simple-elf/allure-report-action
 4. Нажать `OK` в появившемся окне
 5. Проверить, что на странице рядом с текстом напротив кнопки появился еще текст с выбранным вариантом `Ok`
 
+---
 
 ### TestID 005
 
@@ -126,6 +164,7 @@ https://github.com/simple-elf/allure-report-action
 3. Нажать на кнопку `New Tab`
 4. Проверить, что URL открытой страницы содержит на конце `sample`
 
+---
 
 ### TestID 006
 

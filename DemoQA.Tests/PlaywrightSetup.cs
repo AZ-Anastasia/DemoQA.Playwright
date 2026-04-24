@@ -13,13 +13,11 @@ public class PlaywrightSetup : PageTest
 {
     protected Dictionary<string, Dictionary<string, object>> Data;
     private static IPlaywright? _playwright;
-    private static IBrowser? _browser;
 
     [OneTimeSetUp]
     public async Task GlobalSetUp()
     {
         _playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-        _browser = await _playwright.Chromium.LaunchAsync();
     }
 
     [SetUp]
@@ -39,9 +37,8 @@ public class PlaywrightSetup : PageTest
     }
 
     [OneTimeTearDown]
-    public async Task TearDown()
+    public void TearDown()
     {
-        if (_browser != null) await _browser.CloseAsync();
         _playwright?.Dispose();
     }
 }

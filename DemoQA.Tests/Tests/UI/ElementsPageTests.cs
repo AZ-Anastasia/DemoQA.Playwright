@@ -1,3 +1,4 @@
+using Allure.NUnit.Attributes;
 using DemoQA.PagesAndControls.Enums;
 using DemoQA.PagesAndControls.Pages;
 using DemoQA.PagesAndControls.Pages.Elements;
@@ -5,6 +6,8 @@ using NUnit.Framework;
 
 namespace DemoQA.Tests.Tests.UI;
 
+[AllureParentSuite("UI")]
+[AllureSuite("ElementsPage")]
 public class ElementsPageTests : PlaywrightSetup
 {
     private MainPage _mainPage => new(Page);
