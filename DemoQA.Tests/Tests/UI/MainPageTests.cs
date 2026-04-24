@@ -1,14 +1,16 @@
-﻿using DemoQA.PagesAndControls.Pages;
+﻿using Allure.NUnit.Attributes;
+using DemoQA.PagesAndControls.Pages;
 using NUnit.Framework;
 
 namespace DemoQA.Tests.Tests.UI;
 
+[AllureLabel("UI", "MainPage")]
 public class MainPageTests : PlaywrightSetup
 {
     private MainPage _mainPage => new(Page);
 
     [Test]
-    [Property("TestID", "001")]
+    [AllureId(001)]
     public async Task CheckCardsAmountTest()
     {
         await Expect(_mainPage.CategoryCards).ToHaveCountAsync(6);

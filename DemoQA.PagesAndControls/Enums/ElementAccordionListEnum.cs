@@ -8,5 +8,8 @@ public enum ElementAccordionListEnum
     RadioButton = 1,
 
     [Description("Text Box")]
-    TextBox = 2    
+    TextBox = 2,
+    
+    [Description("Web Tables")]
+    WebTables = 3
 }

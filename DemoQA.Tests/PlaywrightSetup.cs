@@ -1,10 +1,12 @@
 using System.Text.Json;
+using Allure.NUnit;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 
 namespace DemoQA.Tests;
 
+[AllureNUnit]
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
 public class PlaywrightSetup : PageTest

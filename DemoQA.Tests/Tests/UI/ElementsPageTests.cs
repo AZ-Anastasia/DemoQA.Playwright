@@ -11,6 +11,7 @@ public class ElementsPageTests : PlaywrightSetup
     private ElementsPageBase _elementsPage => new(Page);
     private RadioButtonPage _radioButtonPage => new(Page);
     private TextBoxPage _textBoxPage => new(Page);
+    private WebTablesPage _webTablesPage => new(Page);
 
     [SetUp]
     public new async Task Setup()
@@ -53,5 +54,32 @@ public class ElementsPageTests : PlaywrightSetup
         await Expect(_textBoxPage.OutputEmail).ToContainTextAsync(email);
         await Expect(_textBoxPage.OutputCurrentAddress).ToContainTextAsync(currentAddress);
         await Expect(_textBoxPage.OutputPermanentAddress).ToContainTextAsync(permanentAddress);
+    }
+
+    [Test]
+    [Property("TestID", "006")]
+    public async Task WebTableFunctianalityTest()
+    {
+        var firstNameKey = Data["WebTables"].Keys.FirstOrDefault()!.ToString();
+
+        await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionWebTables, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
+        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListEnum.WebTables.GetDescription());
+
+        await Expect(_webTablesPage.Headers).ToHaveCountAsync(7);
+        await Expect(_webTablesPage.Rows).ToHaveCountAsync(3);
+        Assert.That(await _webTablesPage.GetColumnIndexAsync(firstNameKey), Is.Not.EqualTo(-1));
+
+        var firstNameToSearch = Data["WebTables"][firstNameKey].ToString()!;
+        var lastNameToChange = Data["WebTables"]["LastNameToChange"].ToString()!;
+        await _webTablesPage.SearchInput.FillAsync(firstNameToSearch);
+        await Expect(_webTablesPage.Rows).ToHaveCountAsync(1);
+
+        await _webTablesPage.EditButton.ClickAsync();
+        await _webTablesPage.ModalWindow.ChangeLastNameAsync(lastNameToChange);
+        await _webTablesPage.ModalWindow.SubmitButton.ClickAsync();
+
+        await _webTablesPage.DeleteButton.ClickAsync();
+        await _webTablesPage.SearchInput.ClearAsync();
+        await Expect(_webTablesPage.Rows).ToHaveCountAsync(2);
     }
 }
