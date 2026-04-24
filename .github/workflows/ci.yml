@@ -1,0 +1,100 @@
+# Название workflow
+name: build and test
+
+# Триггер, при которых будет запущен workflow. Нужен для запуска
+on:
+  # Запускается при push в указанные ветки
+  push:
+  # Запускается при создании Pull Request'а в указанные ветки
+  pull_request:
+    branches: [master]
+
+permissions:
+  actions: write
+  checks: write
+  id-token: write
+  contents: write
+  pages: write
+    
+env:
+  DOTNET_VERSION: '9.0.x'
+  DOTNET_VERSION_DIR: 'net9.0'
+  PROJECT_FILE: 'DemoQA.PagesAndControls/DemoQA.PagesAndControls.csproj'
+  TESTS_DIR: 'DemoQA.Tests'
+  TESTS_FILE: 'DemoQA.Tests/DemoQA.Tests.csproj'
+  BUILD_CONFIGURATION: Debug
+
+# Блок описания работ (что именно нужно сделать)
+jobs:
+  build-and-test:
+  
+    name: build-and-test-${{matrix.os}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        
+    steps:
+      # Цифра - тег версии Actions
+      - uses: actions/checkout@v4
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+                    
+      - name: Install dependencies ${{ env.PROJECT_FILE }}
+        run: dotnet restore ${{ env.PROJECT_FILE }}
+  
+      - name: Install dependencies ${{ env.TESTS_FILE }}
+        run: dotnet restore ${{ env.TESTS_FILE }}
+
+      - name: Install Playwright CLI tool
+        run: dotnet tool install --global Microsoft.Playwright.CLI
+        
+      - name: Build project ${{ env.PROJECT_FILE }}
+        run: dotnet build ${{ env.PROJECT_FILE }} --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
+  
+      - name: Build project ${{ env.TESTS_FILE }}
+        run: dotnet build ${{ env.TESTS_FILE }} --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
+  
+      - name: Install Chromium
+        run: |
+          cd ${{ env.TESTS_DIR }}
+          playwright install chromium
+          cd ../
+          
+      - name: Test
+        run: dotnet test ${{ env.TESTS_FILE }} --no-build --configuration ${{ env.BUILD_CONFIGURATION }}
+        
+      - name: Generate Allure Report with history
+        if: always()
+        run: |
+          npm install -g allure-commandline
+          allure generate ./DemoQA.Tests/bin/${{ env.BUILD_CONFIGURATION }}/${{ env.DOTNET_VERSION_DIR }}/allure-results -o allure-report --clean
+          
+      - name: Upload Allure Report as artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: allure-report/
+          retention-days: 7
+  
+  deploy-to-pages:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: always()
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - name: Download Allure Report Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: github-pages
+        path: allure-report/
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
