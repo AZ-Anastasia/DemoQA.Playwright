@@ -64,7 +64,7 @@ jobs:
           cd ../
           
       - name: Test
-        run: dotnet test ${{ env.TESTS_FILE }} --no-build --configuration ${{ env.BUILD_CONFIGURATION }}
+        run: dotnet test ${{ env.TESTS_FILE }} --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --logger:"console;verbosity=detailed"
         
       - name: Generate Allure Report with history
         if: success()
