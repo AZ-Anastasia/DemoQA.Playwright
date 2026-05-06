@@ -67,7 +67,7 @@ jobs:
         run: dotnet test ${{ env.TESTS_FILE }} --no-build --configuration ${{ env.BUILD_CONFIGURATION }}
         
       - name: Generate Allure Report with history
-        if: always()
+        if: success()
         run: |
           npm install -g allure-commandline
           allure generate ./DemoQA.Tests/bin/${{ env.BUILD_CONFIGURATION }}/${{ env.DOTNET_VERSION_DIR }}/allure-results -o allure-report --clean
@@ -82,7 +82,7 @@ jobs:
   deploy-to-pages:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: always()
+    if: success()
 
     environment:
       name: github-pages
