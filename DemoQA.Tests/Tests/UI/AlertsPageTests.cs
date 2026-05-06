@@ -15,7 +15,7 @@ public class AlertsPageTests : PlaywrightSetup
     private AlertsBrowserWindowsPage _alertsPage => new(Page);
 
     [SetUp]
-    public new async Task Setup()
+    public override async Task Setup()
     {
         await base.Setup();
         await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.AlertsFrameWindows.GetDescription());

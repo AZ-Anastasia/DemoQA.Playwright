@@ -1,43 +1,51 @@
 using Allure.Net.Commons;
-using Allure.NUnit.Attributes;
 using Microsoft.Playwright;
 
 namespace DemoQA.PagesAndControls.Pages;
 
-public class PageBase
+public class PageBase(IPage page)
 {
-    private readonly IPage _page;
+    private readonly IPage _page = page;
     public ILocator Title => _page.Locator("h1");
+    public ILocator AccordionTitle(string accordionName) =>
+        _page
+            .Locator(".element-group")
+            .Filter(new LocatorFilterOptions { HasText = accordionName });
+    public ILocator Accordion(ILocator locator) => locator.Locator(".element-list");
+    public ILocator AccordionItem(ILocator locator, string accordionItemName) =>
+        locator
+            .Locator("li")
+            .Filter(new LocatorFilterOptions { HasText = accordionItemName });
 
-    public PageBase(IPage page)
-    {
-        _page = page;
-    }
-
-    public ILocator GetAccordionTitle(string accordionName) => _page.Locator(".element-group").Filter(new LocatorFilterOptions { HasText = accordionName });
-    public ILocator GetAccordion(ILocator locator) => locator.Locator(".element-list");
-    public ILocator GetAccordionItem(ILocator locator, string accordionItemName) => locator.Locator("li").Filter(new LocatorFilterOptions { HasText = accordionItemName });
     public async Task<bool> IsAccordionUnfoldedAsync(ILocator locator) => (await locator.GetAttributeAsync("class"))!.Contains("show");
     public async Task<bool> IsAccordionItemSelectedAsync(ILocator locator) => (await locator.GetAttributeAsync("class"))!.Contains("active");
 
-    [AllureStep("Развернуть вкладку с элементами из аккордиона, если она свернута")]
     public async Task UnfoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
-        if (!await IsAccordionUnfoldedAsync(locatorList))
-            await locatorTitle.ClickAsync();
+        await AllureApi.Step(
+            "Развернуть вкладку с элементами из аккордиона, если она свернута",
+            async () =>
+        {
+            if (!await IsAccordionUnfoldedAsync(locatorList))
+                await locatorTitle.ClickAsync();
+        });
     }
 
-    [AllureStep("Свернуть вкладку с элементами из аккордиона, если она развернута")]
     public async Task FoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
-        if (await IsAccordionUnfoldedAsync(locatorList))
-            await locatorTitle.ClickAsync();
+        await AllureApi.Step(
+            "Свернуть вкладку с элементами из аккордиона, если она развернута",
+            async () =>
+        {
+            if (await IsAccordionUnfoldedAsync(locatorList))
+                await locatorTitle.ClickAsync();
+        });
     }
 
     public async Task OpenTabFromElementsAccordionAsync(ILocator locator, ILocator locatorList, ILocator locatorTitle)
     {
         await AllureApi.Step(
-            $"Открыть страницу с элементом из вкладки аккордиона ${await locatorTitle.TextContentAsync()}",
+            $"Открыть страницу с элементом из вкладки аккордиона {(await locatorTitle.Locator(".group-header").TextContentAsync())!.Trim()}",
             async () =>
         {
             await UnfoldElementsAccordionAsync(locatorList, locatorTitle);

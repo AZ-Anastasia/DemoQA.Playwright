@@ -17,7 +17,7 @@ public class ElementsPageTests : PlaywrightSetup
     private WebTablesPage _webTablesPage => new(Page);
 
     [SetUp]
-    public new async Task Setup()
+    public override async Task Setup()
     {
         await base.Setup();
         await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.Elements.ToString());

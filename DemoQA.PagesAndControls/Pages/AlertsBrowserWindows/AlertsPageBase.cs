@@ -5,8 +5,8 @@ namespace DemoQA.PagesAndControls.Pages.AlertsBrowserWindows;
 
 public class AlertsPageBase(IPage page) : PageBase(page)
 {
-    public ILocator AlertsAccordionTitle => GetAccordionTitle(AccordionListEnum.AlertsFrameWindows.GetDescription());
-    public ILocator AlertsAccordion => GetAccordion(AlertsAccordionTitle);
-    public ILocator AccordionAlerts => GetAccordionItem(AlertsAccordion, AlertsAccordionListEnum.Alerts.GetDescription());
-    public ILocator AccordionBrowserWindows => GetAccordionItem(AlertsAccordion, AlertsAccordionListEnum.BrowserWindows.GetDescription());
+    public ILocator AlertsAccordionTitle => AccordionTitle(AccordionListEnum.AlertsFrameWindows.GetDescription());
+    public ILocator AlertsAccordion => Accordion(AlertsAccordionTitle);
+    public ILocator AccordionAlerts => AccordionItem(AlertsAccordion, AlertsAccordionListEnum.Alerts.GetDescription());
+    public ILocator AccordionBrowserWindows => AccordionItem(AlertsAccordion, AlertsAccordionListEnum.BrowserWindows.GetDescription());
 }

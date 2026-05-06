@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="uft-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
+    <NUnit>
+        <!-- Кол-во ядер / 2 (для исключения зависания)-->
+        <NumberOfTestWorkers>1</NumberOfTestWorkers>
+    </NUnit>
+
     <Playwright>
         <BrowserName>chromium</BrowserName>
         <LaunchOptions>
-            <Headless>false</Headless>
+            <Headless>true</Headless>
             <Channel>chrome</Channel>
         </LaunchOptions>
     </Playwright>
