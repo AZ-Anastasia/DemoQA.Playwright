@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Allure.Net.Commons;
 using Allure.NUnit;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
@@ -11,7 +12,7 @@ namespace DemoQA.Tests;
 [TestFixture]
 public class PlaywrightSetup : PageTest
 {
-    protected Dictionary<string, Dictionary<string, object>> Data;
+    protected Dictionary<string, Dictionary<string, object>> Data { get; set; } = null!;
     private static IPlaywright? _playwright;
 
     [OneTimeSetUp]
@@ -23,17 +24,25 @@ public class PlaywrightSetup : PageTest
     [SetUp]
     public async Task Setup()
     {
-        var pathToDirectory = Path.Combine(
-            Directory.GetParent(
+        AllureApi.Step("Получение тестовых данных из файла", () =>
+        {
+            var pathToDirectory = Path.Combine(
                 Directory.GetParent(
-                    AppDomain.CurrentDomain.BaseDirectory)!
-                    .Parent!.FullName)!
-                .Parent!.FullName,
-            "TestData.json");
-        var json = File.ReadAllText(pathToDirectory);
-        Data = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(json)!;
+                    Directory.GetParent(
+                        AppDomain.CurrentDomain.BaseDirectory)!
+                        .Parent!.FullName)!
+                    .Parent!.FullName,
+                "TestData.json");
+            var json = File.ReadAllText(pathToDirectory);
+            Data = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(json)!;
+        });
 
-        await Page.GotoAsync(Data["DefaultSettings"]["Url"].ToString()!);
+        var url = Data["DefaultSettings"]["Url"].ToString();
+
+        await AllureApi.Step($"Переход на сайт {url}", async () =>
+        {
+            await Page.GotoAsync(url!);
+        });
     }
 
     [OneTimeTearDown]

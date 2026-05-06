@@ -25,7 +25,7 @@ public class ElementsPageTests : PlaywrightSetup
     }
 
     [Test]
-    [Property("TestID", "002")]
+    [AllureId(002)]
     public async Task AnswerThatYouLikeSiteTest()
     {
         await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionRadioButton, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
@@ -37,7 +37,7 @@ public class ElementsPageTests : PlaywrightSetup
     }
 
     [Test]
-    [Property("TestID", "003")]
+    [AllureId(003)]
     public async Task AddNewUserTest()
     {
         await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionTextBox, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
@@ -60,7 +60,7 @@ public class ElementsPageTests : PlaywrightSetup
     }
 
     [Test]
-    [Property("TestID", "006")]
+    [AllureId(006)]
     public async Task WebTableFunctianalityTest()
     {
         var firstNameKey = Data["WebTables"].Keys.FirstOrDefault()!.ToString();

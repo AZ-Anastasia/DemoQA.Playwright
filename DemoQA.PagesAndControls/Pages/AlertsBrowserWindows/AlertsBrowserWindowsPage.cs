@@ -1,3 +1,4 @@
+using Allure.NUnit.Attributes;
 using Microsoft.Playwright;
 
 namespace DemoQA.PagesAndControls.Pages.AlertsBrowserWindows;
@@ -9,6 +10,7 @@ public class AlertsBrowserWindowsPage(IPage page) : AlertsPageBase(page)
     public ILocator ConfirmResult => _page.Locator("#confirmResult");
     private ILocator _newTabButton => _page.GetByRole(AriaRole.Button, new() { Name = "New Tab" });
 
+    [AllureStep("Выбор действия из диалогового окна")]
     public async Task<string> ChooseConfirmOptionAsync(bool shouldAccept)
     {
         _page.Dialog += async (_, dialog) =>
@@ -23,6 +25,7 @@ public class AlertsBrowserWindowsPage(IPage page) : AlertsPageBase(page)
         return shouldAccept ? "Ok" : "Cancel";
     }
 
+    [AllureStep("Открытие новой вкладки в браузере через кнопку из вкладки аккордиона Alerts")]
     public async Task<IPage> OpenNewTabAsync()
     {
         var newPage = await _page.RunAndWaitForPopupAsync(async () =>

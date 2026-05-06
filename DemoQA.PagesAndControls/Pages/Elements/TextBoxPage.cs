@@ -2,9 +2,9 @@ using Microsoft.Playwright;
 
 namespace DemoQA.PagesAndControls.Pages.Elements;
 
-public class TextBoxPage : PageBase
+public class TextBoxPage(IPage page) : PageBase(page)
 {
-    private readonly IPage _page;
+    private readonly IPage _page = page;
     public ILocator FullNameInput => _page.Locator("#userName");
     public ILocator EmailInput => _page.Locator("#userEmail");
     public ILocator CurrentAddressInput => _page.Locator("#currentAddress");
@@ -16,9 +16,4 @@ public class TextBoxPage : PageBase
     public ILocator OutputEmail => _outputContainer.Locator("#email");
     public ILocator OutputCurrentAddress => _outputContainer.Locator("#currentAddress");
     public ILocator OutputPermanentAddress => _outputContainer.Locator("#permanentAddress");
-
-    public TextBoxPage(IPage page) : base(page)
-    {
-        _page = page;
-    }    
 }

@@ -23,7 +23,7 @@ public class AlertsPageTests : PlaywrightSetup
     }
 
     [Test]
-    [Property("TestID", "004")]
+    [AllureId(004)]
     public async Task ConfirmAlertTest()
     {
         await _alertsPageBase.OpenTabFromElementsAccordionAsync(_alertsPageBase.AccordionAlerts, _alertsPageBase.AlertsAccordion, _alertsPageBase.AlertsAccordionTitle);
@@ -35,7 +35,7 @@ public class AlertsPageTests : PlaywrightSetup
     }
 
     [Test]
-    [Property("TestID", "005")]
+    [AllureId(005)]
     public async Task OpenNewTabTest()
     {
         await _alertsPageBase.OpenTabFromElementsAccordionAsync(_alertsPageBase.AccordionBrowserWindows, _alertsPageBase.AlertsAccordion, _alertsPageBase.AlertsAccordionTitle);

@@ -4,11 +4,9 @@ using Microsoft.Playwright;
 
 namespace DemoQA.PagesAndControls.Pages.Elements;
 
-public class RadioButtonPage : PageBase
+public class RadioButtonPage(IPage page) : PageBase(page)
 {
-    private readonly IPage _page;
+    private readonly IPage _page = page;
     public RadioButton RadioButtonImpressive => new(_page.GetByLabel(RadioButtonPageEnums.Impressive.ToString()));
     public RadioButton TextSuccess => new(_page.Locator(".text-success"));
-    public RadioButtonPage(IPage page) : base(page) => _page = page;
-
 }
