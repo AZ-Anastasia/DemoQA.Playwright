@@ -1,4 +1,4 @@
-using Allure.Net.Commons;
+using DemoQA.Tests.Helpers;
 using Microsoft.Playwright;
 
 namespace DemoQA.PagesAndControls.Pages;
@@ -19,11 +19,13 @@ public class PageBase(IPage page)
 
     public async Task<bool> IsAccordionUnfoldedAsync(ILocator locator) => (await locator.GetAttributeAsync("class"))!.Contains("show");
     public async Task<bool> IsAccordionItemSelectedAsync(ILocator locator) => (await locator.GetAttributeAsync("class"))!.Contains("active");
+    public async Task<byte[]> ScreenshotAsync() => await _page.ScreenshotAsync();
 
     public async Task UnfoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
-        await AllureApi.Step(
-            "Развернуть вкладку с элементами из аккордиона, если она свернута",
+        await AllureHelper.ScreenshotAttachmentAsync(
+            "Развернуть вкладку с элементами из аккордеона, если она свернута",
+            this,
             async () =>
         {
             if (!await IsAccordionUnfoldedAsync(locatorList))
@@ -33,8 +35,9 @@ public class PageBase(IPage page)
 
     public async Task FoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
-        await AllureApi.Step(
-            "Свернуть вкладку с элементами из аккордиона, если она развернута",
+        await AllureHelper.ScreenshotAttachmentAsync(
+            "Свернуть вкладку с элементами из аккордеона, если она развернута",
+            this,
             async () =>
         {
             if (await IsAccordionUnfoldedAsync(locatorList))
@@ -44,8 +47,9 @@ public class PageBase(IPage page)
 
     public async Task OpenTabFromElementsAccordionAsync(ILocator locator, ILocator locatorList, ILocator locatorTitle)
     {
-        await AllureApi.Step(
-            $"Открыть страницу с элементом из вкладки аккордиона {(await locatorTitle.Locator(".group-header").TextContentAsync())!.Trim()}",
+        await AllureHelper.ScreenshotAttachmentAsync(
+            $"Открыть страницу с элементом из вкладки аккордеона {(await locatorTitle.Locator(".group-header").TextContentAsync())!.Trim()}",
+            this,
             async () =>
         {
             await UnfoldElementsAccordionAsync(locatorList, locatorTitle);
