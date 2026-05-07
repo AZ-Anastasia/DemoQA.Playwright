@@ -5,6 +5,7 @@ name: build and test
 on:
   # Запускается при push в указанные ветки
   push:
+    branches: [master]
   # Запускается при создании Pull Request'а в указанные ветки
   pull_request:
     branches: [master]

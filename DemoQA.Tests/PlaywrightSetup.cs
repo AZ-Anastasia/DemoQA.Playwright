@@ -1,6 +1,6 @@
 using System.Text.Json;
-using Allure.Net.Commons;
 using Allure.NUnit;
+using DemoQA.Tests.Helpers;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 
@@ -32,7 +32,9 @@ public class PlaywrightSetup : PageTest
     {
         var url = Data["DefaultSettings"]["Url"].ToString();
 
-        await AllureApi.Step($"Переход на сайт {url}", async () =>
+        await AllureHelper.ScreenshotAttachmentAsync($"Переход на сайт {url}",
+        Page,
+        async () =>
         {
             await Page.GotoAsync(url!);
         });
