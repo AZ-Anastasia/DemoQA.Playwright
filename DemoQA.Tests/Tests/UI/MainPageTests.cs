@@ -1,4 +1,5 @@
-﻿using Allure.NUnit.Attributes;
+﻿using Allure.Net.Commons;
+using Allure.NUnit.Attributes;
 using DemoQA.PagesAndControls.Pages;
 using NUnit.Framework;
 
@@ -14,6 +15,10 @@ public class MainPageTests : PlaywrightSetup
     [AllureId(001)]
     public async Task CheckCardsAmountTest()
     {
-        await Expect(_mainPage.CategoryCards).ToHaveCountAsync(6);
+        var expectedCardsAmount = 6;
+        await AllureApi.Step("Проверка количества карточек на странице", async () =>
+        {
+            await Expect(_mainPage.CategoryCards).ToHaveCountAsync(expectedCardsAmount);
+        });
     }
 }
