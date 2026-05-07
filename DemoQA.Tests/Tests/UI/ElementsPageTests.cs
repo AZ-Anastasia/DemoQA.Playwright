@@ -22,7 +22,6 @@ public class ElementsPageTests : PlaywrightSetup
     {
         await base.Setup();
         await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.Elements.ToString());
-        await _elementsPage.UnfoldElementsAccordionAsync(_elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
     }
 
     [Test]

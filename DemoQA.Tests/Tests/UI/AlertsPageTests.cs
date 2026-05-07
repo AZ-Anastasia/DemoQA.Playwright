@@ -19,7 +19,6 @@ public class AlertsPageTests : PlaywrightSetup
     {
         await base.Setup();
         await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.AlertsFrameWindows.GetDescription());
-        await _alertsPageBase.UnfoldElementsAccordionAsync(_alertsPageBase.AlertsAccordion, _alertsPageBase.AlertsAccordionTitle);
     }
 
     [Test]

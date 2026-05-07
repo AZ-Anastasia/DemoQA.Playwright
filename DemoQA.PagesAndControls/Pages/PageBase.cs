@@ -21,7 +21,7 @@ public class PageBase(IPage page)
     public async Task<bool> IsAccordionItemSelectedAsync(ILocator locator) => (await locator.GetAttributeAsync("class"))!.Contains("active");
     public async Task<byte[]> ScreenshotAsync() => await _page.ScreenshotAsync();
 
-    public async Task UnfoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
+    private async Task UnfoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
         await AllureHelper.ScreenshotAttachmentAsync(
             "Развернуть вкладку с элементами из аккордеона, если она свернута",
@@ -33,7 +33,7 @@ public class PageBase(IPage page)
         });
     }
 
-    public async Task FoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
+    private async Task FoldElementsAccordionAsync(ILocator locatorList, ILocator locatorTitle)
     {
         await AllureHelper.ScreenshotAttachmentAsync(
             "Свернуть вкладку с элементами из аккордеона, если она развернута",
