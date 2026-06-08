@@ -100,10 +100,7 @@ public class BookStoreTests : PlaywrightSetup
 
     private async Task<UserSignInModel> PostUserWithStepAsync()
     {
-        return await AllureApi.Step("Добавление пользователя", async () =>
-        {
-            return await _accountSteps.PostUserAsync(_user);
-        });
+        return await _accountSteps.PostUserAsync(_user);
     }
 
     private AddListOfBooksModel GetDefaultBookList()
