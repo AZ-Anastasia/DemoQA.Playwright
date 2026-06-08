@@ -11,6 +11,12 @@ public class MainPageTests : PlaywrightSetup
 {
     private MainPage _mainPage => new(Page);
 
+    [SetUp]
+    public override async Task Setup()
+    {
+        await base.SetupUI();
+    }
+
     [Test]
     [AllureId(001)]
     public async Task CheckCardsAmountTest()

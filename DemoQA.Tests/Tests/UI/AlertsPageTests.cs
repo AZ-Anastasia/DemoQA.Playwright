@@ -17,8 +17,8 @@ public class AlertsPageTests : PlaywrightSetup
     [SetUp]
     public override async Task Setup()
     {
-        await base.Setup();
-        await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.AlertsFrameWindows.GetDescription());
+        await base.SetupUI();
+        await _mainPage.GoToCategoryCardPageAsync(AccordionListName.AlertsFrameWindows.GetDescription());
     }
 
     [Test]
@@ -26,7 +26,7 @@ public class AlertsPageTests : PlaywrightSetup
     public async Task ConfirmAlertTest()
     {
         await _alertsPageBase.OpenTabFromElementsAccordionAsync(_alertsPageBase.AccordionAlerts, _alertsPageBase.AlertsAccordion, _alertsPageBase.AlertsAccordionTitle);
-        await Expect(_alertsPageBase.Title).ToHaveTextAsync(AlertsAccordionListEnum.Alerts.GetDescription());
+        await Expect(_alertsPageBase.Title).ToHaveTextAsync(AlertsAccordionListName.Alerts.GetDescription());
 
         var result = await _alertsPage.ChooseConfirmOptionAsync(true);
         await _alertsPage.ConfirmButton.ClickAsync();
@@ -38,7 +38,7 @@ public class AlertsPageTests : PlaywrightSetup
     public async Task OpenNewTabTest()
     {
         await _alertsPageBase.OpenTabFromElementsAccordionAsync(_alertsPageBase.AccordionBrowserWindows, _alertsPageBase.AlertsAccordion, _alertsPageBase.AlertsAccordionTitle);
-        await Expect(_alertsPageBase.Title).ToHaveTextAsync(AlertsAccordionListEnum.BrowserWindows.GetDescription());
+        await Expect(_alertsPageBase.Title).ToHaveTextAsync(AlertsAccordionListName.BrowserWindows.GetDescription());
 
         var newTabPage = await _alertsPage.OpenNewTabAsync();
         Assert.That(newTabPage.Url.Split('/').Last(), Does.Contain("sample"));

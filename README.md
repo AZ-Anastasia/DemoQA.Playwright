@@ -72,6 +72,31 @@
 
 </details>
 
+<details>
+   <summary>
+      <b>
+         Про оформление API-тестов:
+      </b>
+   </summary>
+
+- [Habr: Пишем API автотесты на TypeScript + Playwright](https://habr.com/ru/articles/718814/)
+- [Habr: Все паттерны в автоматизации тестирования](https://habr.com/ru/articles/1004628/)
+
+</details>
+
+<details>
+   <summary>
+      <b>
+         Про оформление UI-тестов:
+      </b>
+   </summary>
+
+- [Playwright: Writing tests](https://playwright.dev/dotnet/docs/writing-tests)
+- [Playwright: Page object models](https://playwright.dev/dotnet/docs/pom)
+- [Habr: Все паттерны в автоматизации тестирования](https://habr.com/ru/articles/1004628/)
+
+</details>
+
 ---
 ---
 ---

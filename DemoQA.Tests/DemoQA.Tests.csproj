@@ -20,6 +20,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="../DemoQA.API/DemoQA.API.csproj" />
     <ProjectReference Include="../DemoQA.PagesAndControls/DemoQA.PagesAndControls.csproj" />
   </ItemGroup>
   
@@ -30,6 +31,10 @@
     <None Update="TestData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="TestsSteps/" />
   </ItemGroup>
   
 </Project>

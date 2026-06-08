@@ -1,6 +1,10 @@
 {
     "DefaultSettings":{
-        "Url": "https://demoqa.com/"
+        "Url": "https://demoqa.com"
+    },
+    "UserAPI":{
+        "UserName": "TestUserUserSignInModel",
+        "Password": "Admin0_0!"
     },
     "User":{
         "FullName": "Иван Иванов",

@@ -20,8 +20,8 @@ public class ElementsPageTests : PlaywrightSetup
     [SetUp]
     public override async Task Setup()
     {
-        await base.Setup();
-        await _mainPage.GoToCategoryCardPageAsync(AccordionListEnum.Elements.ToString());
+        await base.SetupUI();
+        await _mainPage.GoToCategoryCardPageAsync(AccordionListName.Elements.ToString());
     }
 
     [Test]
@@ -29,7 +29,7 @@ public class ElementsPageTests : PlaywrightSetup
     public async Task AnswerThatYouLikeSiteTest()
     {
         await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionRadioButton, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
-        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListEnum.RadioButton.GetDescription());
+        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListName.RadioButton.GetDescription());
 
         await AllureHelper.ScreenshotAttachmentAsync(
             "Выбор радио-кнопки и проверка отображения текста о выбранной кнопке",
@@ -38,7 +38,7 @@ public class ElementsPageTests : PlaywrightSetup
         {
             await _radioButtonPage.RadioButtonImpressive.ClickAsync();
             await Assert.ThatAsync(_radioButtonPage.RadioButtonImpressive.IsCheckedAsync, Is.True);
-            await Assert.ThatAsync(_radioButtonPage.TextSuccess.TextContentAsync, Does.Contain(RadioButtonPageEnums.Impressive.ToString()));
+            await Assert.ThatAsync(_radioButtonPage.TextSuccess.TextContentAsync, Does.Contain(RadioButtonPageName.Impressive.ToString()));
         });
     }
 
@@ -47,7 +47,7 @@ public class ElementsPageTests : PlaywrightSetup
     public async Task AddNewUserTest()
     {
         await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionTextBox, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
-        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListEnum.TextBox.GetDescription());
+        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListName.TextBox.GetDescription());
 
         var name = Data["User"]["FullName"].ToString()!;
         var email = Data["User"]["Email"].ToString()!;
@@ -80,7 +80,7 @@ public class ElementsPageTests : PlaywrightSetup
         var firstNameToSearch = Data["WebTables"][firstNameKey].ToString()!;
 
         await _elementsPage.OpenTabFromElementsAccordionAsync(_elementsPage.AccordionWebTables, _elementsPage.ElementsAccordion, _elementsPage.ElementsAccordionTitle);
-        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListEnum.WebTables.GetDescription());
+        await Expect(_elementsPage.Title).ToHaveTextAsync(ElementAccordionListName.WebTables.GetDescription());
 
         await AllureHelper.ScreenshotAttachmentAsync(
             "Проверка количества столбцов и строк в таблице",

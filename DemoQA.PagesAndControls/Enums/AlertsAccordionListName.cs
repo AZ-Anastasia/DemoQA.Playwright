@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace DemoQA.PagesAndControls.Enums;
 
-public enum AlertsAccordionListEnum
+public enum AlertsAccordionListName
 {
     [Description("Alerts")]
     Alerts = 1,

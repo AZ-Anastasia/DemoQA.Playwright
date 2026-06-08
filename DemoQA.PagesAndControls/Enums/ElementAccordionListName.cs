@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace DemoQA.PagesAndControls.Enums;
 
-public enum ElementAccordionListEnum
+public enum ElementAccordionListName
 {
     [Description("Radio Button")]
     RadioButton = 1,

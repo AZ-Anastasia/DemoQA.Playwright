@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace DemoQA.PagesAndControls.Enums;
 
-public enum AccordionListEnum
+public enum AccordionListName
 {
     [Description("Elements")]
     Elements = 1,

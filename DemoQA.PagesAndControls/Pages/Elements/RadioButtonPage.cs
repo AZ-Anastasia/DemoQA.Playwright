@@ -7,6 +7,6 @@ namespace DemoQA.PagesAndControls.Pages.Elements;
 public class RadioButtonPage(IPage page) : PageBase(page)
 {
     private readonly IPage _page = page;
-    public RadioButton RadioButtonImpressive => new(_page.GetByLabel(RadioButtonPageEnums.Impressive.ToString()));
+    public RadioButton RadioButtonImpressive => new(_page.GetByLabel(RadioButtonPageName.Impressive.ToString()));
     public RadioButton TextSuccess => new(_page.Locator(".text-success"));
 }
