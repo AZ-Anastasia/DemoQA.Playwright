@@ -46,7 +46,7 @@ public class BookStoreGuestTests : PlaywrightSetup
         var response = await _bookStoreClient.GetBookAsync(isbnToSearchFor);
         await Expect(response).ToBeOKAsync();
         var isbnFromResult = await response.ToModelAsync<BookModel>();
-        Assert.That(isbnFromResult, Is.EqualTo(isbnToSearchFor));
+        Assert.That(isbnFromResult.Isbn, Is.EqualTo(isbnToSearchFor));
     }
 
     #endregion
