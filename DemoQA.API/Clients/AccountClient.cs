@@ -7,31 +7,31 @@ namespace DemoQA.API.Clients;
 
 public class AccountClient(IAPIRequestContext request, string baseUrl = "/Account") : BaseApiClient(request, baseUrl)
 {
-    [AllureStep("{this}: Авторизация пользователя")]
+    [AllureStep("AccountClient: Авторизация пользователя")]
     public async Task<IAPIResponse> PostAuthorizedAsync(UserAuthModel user)
     {
         return await PostAsync("v1/Authorized", user);
     }
 
-    [AllureStep("{this}: Генерация токена")]
+    [AllureStep("AccountClient: Генерация токена")]
     public async Task<IAPIResponse> PostGenerateTokenAsync(UserAuthModel user)
     {
         return await PostAsync("v1/GenerateToken", user);
     }
 
-    [AllureStep("{this}: Регистрация пользователя")]
+    [AllureStep("AccountClient: Регистрация пользователя")]
     public async Task<IAPIResponse> PostUserAsync(UserAuthModel user)
     {
         return await PostAsync("v1/User", user);
     }
 
-    [AllureStep("{this}: Удаление пользователя")]
+    [AllureStep("AccountClient: Удаление пользователя")]
     public async Task<IAPIResponse> DeleteUserAsync(string uuid)
     {
         return await DeleteAsync($"v1/User/{uuid}");
     }
 
-    [AllureStep("{this}: Получение пользователя")]
+    [AllureStep("AccountClient: Получение пользователя")]
     public async Task<IAPIResponse> GetUserAsync(string uuid)
     {
         return await GetAsync($"v1/User/{uuid}");
