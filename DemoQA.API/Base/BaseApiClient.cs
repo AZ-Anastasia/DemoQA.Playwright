@@ -8,7 +8,12 @@ public abstract class BaseApiClient : PlaywrightTest
 {
     protected readonly IAPIRequestContext Request;
     protected readonly string BaseUrl;
-    private static string? _token;
+    private string? _token;
+
+    public void CopyTokenFrom(BaseApiClient apiClient)
+    {
+        _token = apiClient._token;
+    }
 
     /// <summary>
     /// Тестовые данные из файла

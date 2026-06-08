@@ -86,6 +86,8 @@ public class BookStoreTests : PlaywrightSetup
         {
             await _accountSteps.IsTokenGeneratedAsync(_user);
         });
+
+        _bookStoreClient.CopyTokenFrom(_accountClient);
     }
 
     [TearDown]
